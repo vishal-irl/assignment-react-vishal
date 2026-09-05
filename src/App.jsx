@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -6,29 +6,37 @@ function App() {
 
   const students = [
     {
-      name: "Vishal",
+      name: "Jagruti",
       course: "BCA",
       semester: "5th Semester",
+      email: "jagruti@gmail.com",
+      phone: "9876543210",
+      city: "Navsari",
     },
     {
-      name: "Shravan",
-      course: "Arts",
-      semester: "1st Semester",
-    },
-    {
-      name: "Gitesh",
-      course: "BCom",
+      name: "Bhumika",
+      course: "Bcom",
       semester: "6th Semester",
+      email: "bhumika@gmail.com",
+      phone: "9876543211",
+      city: "Navsari",
+    },
+    {
+      name: "Hetal",
+      course: "BBA",
+      semester: "4th Semester",
+      email: "hetal@gmail.com",
+      phone: "9876543212",
+      city: "Surat",
     },
   ];
 
   return (
     <div className="app">
 
-      {/* STUDENT PAGE */}
-      {page === "students" && (
+      {page === "students" ? (
         <>
-          <h1>Student Profile</h1>
+          <h1 className="title">Student Profile</h1>
 
           <div className="student-container">
             {students.map((student, index) => (
@@ -37,11 +45,13 @@ function App() {
                 name={student.name}
                 course={student.course}
                 semester={student.semester}
+                email={student.email}
+                phone={student.phone}
+                city={student.city}
               />
             ))}
           </div>
 
-          {/* TEXT ANALYZER BUTTON */}
           <button
             className="analyzer-btn"
             onClick={() => setPage("analyzer")}
@@ -49,13 +59,8 @@ function App() {
             Text Analyzer
           </button>
         </>
-      )}
-
-      {/* TEXT ANALYZER PAGE */}
-      {page === "analyzer" && (
-        <TextAnalyzer
-          onBack={() => setPage("students")}
-        />
+      ) : (
+        <TextAnalyzer onBack={() => setPage("students")} />
       )}
 
     </div>
@@ -63,9 +68,18 @@ function App() {
 }
 
 
-/* STUDENT CARD */
+/* =========================
+   STUDENT CARD
+========================= */
 
-function StudentCard({ name, course, semester }) {
+function StudentCard({
+  name,
+  course,
+  semester,
+  email,
+  phone,
+  city,
+}) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -73,8 +87,7 @@ function StudentCard({ name, course, semester }) {
 
       <h2>{name}</h2>
 
-      <p>-Course: {course}</p>
-
+      <p>Course: {course}</p>
       <p>Semester: {semester}</p>
 
       <button
@@ -85,9 +98,9 @@ function StudentCard({ name, course, semester }) {
 
       {showDetails && (
         <div className="details">
-          <p>Name: {name}</p>
-          <p>Course: {course}</p>
-          <p>Semester: {semester}</p>
+          <p>Email: {email}</p>
+          <p>Phone: {phone}</p>
+          <p>City: {city}</p>
         </div>
       )}
 
@@ -96,7 +109,9 @@ function StudentCard({ name, course, semester }) {
 }
 
 
-/* TEXT ANALYZER */
+/* =========================
+   TEXT ANALYZER
+========================= */
 
 function TextAnalyzer({ onBack }) {
   const [text, setText] = useState("");
@@ -108,10 +123,13 @@ function TextAnalyzer({ onBack }) {
 
   const characters = text.length;
 
+  useEffect(() => {
+    document.title = `Text Analyzer - ${characters} Characters`;
+  }, [characters]);
+
   return (
     <div className="analyzer-page">
 
-      {/* BACK BUTTON */}
       <button
         className="back-btn"
         onClick={onBack}
@@ -122,9 +140,9 @@ function TextAnalyzer({ onBack }) {
       <h1>Text Analyzer</h1>
 
       <textarea
-        placeholder="Write something here..."
         value={text}
         onChange={(e) => setText(e.target.value)}
+        placeholder="Write something here..."
       />
 
       <div className="stats">
