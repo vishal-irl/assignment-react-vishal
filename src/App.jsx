@@ -6,26 +6,26 @@ function App() {
 
   const students = [
     {
-      name: "Jagruti",
+      name: "Vishal",
       course: "BCA",
       semester: "5th Semester",
-      email: "jagruti@gmail.com",
+      email: "vishal@gmail.com",
       phone: "9876543210",
       city: "Navsari",
     },
     {
-      name: "Bhumika",
+      name: "Shravan",
       course: "Bcom",
       semester: "6th Semester",
-      email: "bhumika@gmail.com",
+      email: "Shravan@gmail.com",
       phone: "9876543211",
       city: "Navsari",
     },
     {
-      name: "Hetal",
+      name: "Gitesh",
       course: "BBA",
       semester: "4th Semester",
-      email: "hetal@gmail.com",
+      email: "Giteh@gmail.com",
       phone: "9876543212",
       city: "Surat",
     },
